@@ -1,1 +1,1 @@
-{"add1_col":"Address_line_1","ref_col":"Reference","con_col":"Contents","delimiter":",","quote_char":"\""}
+{"addr1_col":"Address_line_1", "addr2_col": "Address_line_2", "addr3_col": "Address_line_3","ref_col":"Reference","con_col":"Contents","delimiter":",","quote_char":"\"", "fix_addr": "True"}

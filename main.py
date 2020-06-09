@@ -39,7 +39,7 @@ class csv_file:
     def remove_blanks(self):
         print("Removing blank lines...")
 
-        self.content = [row for row in self.content if row[self.settings['add1_col']] != ""]
+        self.content = [row for row in self.content if row[self.settings['addr1_col']] != ""]
 
     def convert_del_ref(self):
         print("Converting delivery references...")
@@ -52,6 +52,25 @@ class csv_file:
                 self.content[dict_num][con_col_name] = self.content[dict_num][con_col_name].replace(k,v)
 
             self.content[dict_num][ref_col_name] = self.content[dict_num][con_col_name]
+
+    def fix_addresses(self):
+        if self.settings['fix_addr'] == 'True':
+            print("Fixing Addresses...")
+            for dict_num, ord_dict in enumerate(self.content):
+                addr1_col = self.settings['addr1_col']
+                addr2_col = self.settings['addr2_col']
+                addr3_col = self.settings['addr3_col']
+
+                split_addr = ord_dict[addr1_col].split(',')
+                if len(split_addr) == 2:
+                    self.content[dict_num][addr1_col] = split_addr[0]
+                    self.content[dict_num][addr2_col] = split_addr[1]
+                if len(split_addr) == 3:
+                    self.content[dict_num][addr1_col] = split_addr[0]
+                    self.content[dict_num][addr2_col] = split_addr[1]
+                    self.content[dict_num][addr3_col] = split_addr[2]
+        else:
+            print("Fixing Addresses... (skipping...)")
 
     def write_file(self):
         print("Writing to file...")
@@ -89,14 +108,16 @@ if __name__ == '__main__':
             path = get_path()
 
             file = csv_file(path)
-            time.sleep(1.5)
+            time.sleep(1)
             file.remove_blanks()
-            time.sleep(1.5)
+            time.sleep(1)
             file.convert_del_ref()
-            time.sleep(1.5)
+            time.sleep(2.5)
+            file.fix_addresses()
+            time.sleep(1)
             file.write_file()
-            time.sleep(1.5)
+            time.sleep(2.5)
             print("ALL DONE!")
             input("Press enter to continue...")
         except ProgramRestart:
-           input("Fix error and restart or press enter to continue...")
+           input("\nFix error and restart or press enter to continue...")
