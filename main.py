@@ -5,6 +5,7 @@ import tkinter
 from tkinter import filedialog
 import time
 from datetime import date
+import sys
 
 
 class ProgramRestart(Exception):
@@ -91,7 +92,7 @@ class CsvFile:
         root = tkinter.Tk()
         root.withdraw()
         root.attributes("-topmost", True)
-        path = filedialog.asksaveasfilename(title="Where would you like to save it?", defaultextension=".csv",
+        path = filedialog.asksaveasfilename(title="Save as", defaultextension=".csv",
                                             initialfile=file_name)
 
         with open(path, 'w', newline='') as csv_file:
@@ -121,7 +122,7 @@ def get_path():
     root = tkinter.Tk()
     root.withdraw()
     root.attributes("-topmost", True)
-    root.filename = filedialog.askopenfilename(initialdir="/", title="Gimme that csv pls.",
+    root.filename = filedialog.askopenfilename(initialdir="/", title="Choose a csv file",
                                                filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
 
     path = root.filename
@@ -133,12 +134,11 @@ def get_path():
 
 
 if __name__ == '__main__':
+
     while True:
         try:
             os.system('cls')
-            print(f"{'-'*20}| Hermes Formatter |{'-'*20}")
-            print("\n"*2)
-
+            sys.stdout.write("\x1b];Heremes Formatter\x07")
             path = get_path()
 
             file = CsvFile(path)
@@ -161,9 +161,9 @@ if __name__ == '__main__':
 
             file.write_file()
 
-            input("Press enter to continue...")
+            input("Press enter to convert another file...")
         except ProgramRestart:
             input("\nFix error and restart or press enter to continue...")
         except Exception as e:
             print(e)
-            input()
+            input("\nFix error and restart or press enter to continue...")
