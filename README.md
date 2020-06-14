@@ -1,5 +1,9 @@
 # Hermes Formatter
 
+V1.2.2
+- Fixed bug where only 'multiline' orders of 2 were given the
+  reference 'various'
+
 V1.2
 - Now gives multiline orders the 'various' reference irrespective
   of what items ordered
