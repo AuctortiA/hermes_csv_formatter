@@ -39,20 +39,30 @@ class CsvFile:
 
         ref_col_name = self.settings['ref_col']
         con_col_name = self.settings['con_col']
-
+        end_loop = False
         for dict_num, ord_dict in enumerate(self.content):
-            for k, v in self.keys.items():
-                if dict_num < len(self.content) - 1:
-                    if all(self.content[dict_num + 1][col] == "" for col in ['Address_line_1', 'Address_line_2', 'Address_line_3']):
-                        self.content[dict_num][con_col_name] = 'various'
+            pointer = dict_num + 1
 
-                        self.content[dict_num+1][con_col_name] = ''
-                    else:
-                        self.content[dict_num][con_col_name] = self.content[dict_num][con_col_name].replace(k,v)
-                else:
+            if pointer == len(self.content):
+                for k, v in self.keys.items():
                     self.content[dict_num][con_col_name] = self.content[dict_num][con_col_name].replace(k, v)
+                self.content[dict_num][ref_col_name] = self.content[dict_num][con_col_name]
+                break
 
+            while all(self.content[pointer][col] == "" for col in ['Address_line_1', 'Address_line_2', 'Address_line_3']) and self.content[dict_num][con_col_name] != "":
+                self.content[pointer][con_col_name] = ""
+                self.content[dict_num][con_col_name] = "various"
+                print(dict_num)
+                if pointer == len(self.content)-1:
+                    end_loop = True
+                    break
+                pointer += 1
+            else:
+                for k, v in self.keys.items():
+                    self.content[dict_num][con_col_name] = self.content[dict_num][con_col_name].replace(k,v)
             self.content[dict_num][ref_col_name] = self.content[dict_num][con_col_name]
+            if end_loop:
+                break
 
     def fix_addresses(self):
         if self.settings['fix_addr'] == 'True':
@@ -164,6 +174,6 @@ if __name__ == '__main__':
             input("Press enter to convert another file...")
         except ProgramRestart:
             input("\nFix error and restart or press enter to continue...")
-        except Exception as e:
-            print(e)
-            input("\nFix error and restart or press enter to continue...")
+        # except Exception as e:
+        #     print(e)
+        #     input("\nFix error and restart or press enter to continue...")
