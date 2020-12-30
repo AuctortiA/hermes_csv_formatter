@@ -152,23 +152,17 @@ if __name__ == '__main__':
             path = get_path()
 
             file = CsvFile(path)
-            time.sleep(1)
 
             file.remove_blanks()
-            time.sleep(1)
 
             file.convert_del_ref()
-            time.sleep(2.5)
 
             file.remove_blanks()
-            time.sleep(1)
 
             file.fix_addresses()
-            time.sleep(1)
 
             file.capitalise_names()
-            time.sleep(0.5)
-
+            
             file.write_file()
 
             input("Press enter to convert another file...")
