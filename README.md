@@ -1,6 +1,6 @@
 # Hermes Formatter
 
-# Running preconfigured formatter
+## Running preconfigured formatter
 To start the program:
 ```
  .../hermes_csv_formatter/ $ python3 -m hermes_csv_formatter.main 
