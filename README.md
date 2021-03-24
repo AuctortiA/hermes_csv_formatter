@@ -1,5 +1,10 @@
 # Hermes Formatter
 
+Before running, install dependencies by executing the following:
+```
+ .../hermes_csv_formatter/ $ pip install -r requirements.txt
+```
+
 ## Running preconfigured formatter
 To start the program:
 ```
