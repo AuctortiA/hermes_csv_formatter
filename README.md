@@ -13,4 +13,6 @@ To start the python interpreter:
 ```
 
 To load the functions and classes required:
+```
 >>> from hermes_csv_formatter import *
+```
