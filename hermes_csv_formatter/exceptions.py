@@ -1,0 +1,2 @@
+class ProgramRestart(Exception):
+    pass
