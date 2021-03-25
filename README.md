@@ -12,6 +12,7 @@ compatible with Hermes, ensuring the correct shipping
 labels would be assigned to relevant orders.
 
 ## Running
+### Dependencies
 Before running, install dependencies by executing the following:
 ```
  .../hermes_csv_formatter/ $ pip install -r requirements.txt
